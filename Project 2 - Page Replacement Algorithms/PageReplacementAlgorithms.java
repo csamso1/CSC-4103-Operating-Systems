@@ -16,14 +16,27 @@ public class PageReplacementAlgorithms
 	//MAIN Class
     public static void main(String[] args) throws FileNotFoundException
     {
-    	int cacheSize = 0;
-    	String algorithm;
-    	Scanner scn = new Scanner(System.in);
-    	System.out.printf("Provide input file name: \n");
-    	String inputFileName = scn.nextLine();
+        String algorithm = args[0];
+        int cacheSize = Integer.parseInt(args[1]);
+        String inputFileName = args[2];
+
+
+        // System.out.printf("Using input file: %s", inputFileName);
     	Scanner scan = new Scanner(new File(inputFileName));
-    	PageFile page0 = new PageFile(scan.next(), scan.nextInt());
-    	System.out.printf("page0 = %b pID: %d\n", page0.getWriteStatus(), page0.getPageID());
+        PageFile pageQueue[] = new PageFile[550];
+        int i = 0;
+        while(scan.hasNext() == true)
+        {  
+            pageQueue[i] = new PageFile(scan.next(), scan.nextInt());
+            // PageFile page0 = new PageFile(scan.next(), scan.nextInt());
+            System.out.printf("page%d added to pageQueue :: %b pID: %d\n", i, pageQueue[i].getWriteStatus(), pageQueue[i].getPageID());
+            i++;
+        }
+        //Scanning page files completed
+
+        System.out.printf("System Cache Size: %d\n", cacheSize);
+        System.out.printf("Algorithm to use: %s\n", algorithm);
+
     }
 
     //Class for CLOCK algorithm
