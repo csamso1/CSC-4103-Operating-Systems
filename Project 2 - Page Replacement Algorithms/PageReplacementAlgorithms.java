@@ -16,6 +16,7 @@ public class PageReplacementAlgorithms
 	//MAIN Class
     public static void main(String[] args) throws FileNotFoundException
     {
+        //Uses command line arguments to set algorithm, cache size, and the input file name
         String algorithm = args[0];
         int cacheSize = Integer.parseInt(args[1]);
         String inputFileName = args[2];
