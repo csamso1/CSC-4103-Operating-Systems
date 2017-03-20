@@ -28,13 +28,13 @@ public class PageReplacementAlgorithms
         int cacheSize = Integer.parseInt(args[1]);
         String inputFileName = args[2];
     	Scanner scan = new Scanner(new File(inputFileName));
-        PageFile pageQueue[] = new PageFile[550];
+        PageFile pageTable[] = new PageFile[550];
         int i = 0;
         while(scan.hasNext() == true)
         {  
-            pageQueue[i] = new PageFile(scan.next(), scan.nextInt());
+            pageTable[i] = new PageFile(scan.next(), scan.nextInt());
             // PageFile page0 = new PageFile(scan.next(), scan.nextInt());
-            System.out.printf("page%d added to pageQueue :: %b pID: %d\n", i, pageQueue[i].getWriteStatus(), pageQueue[i].getPageID());
+            System.out.printf("page%d added to pageTable :: %b pID: %d\n", i, pageTable[i].getWriteStatus(), pageTable[i].getPageID());
             i++;
         }
         //END scanning page files
