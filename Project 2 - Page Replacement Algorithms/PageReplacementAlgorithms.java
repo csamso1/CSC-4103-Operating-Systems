@@ -8,8 +8,8 @@ LoginID:	cs410385
 */
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
+import java.util.*;
 
 public class PageReplacementAlgorithms
 {
@@ -28,7 +28,7 @@ public class PageReplacementAlgorithms
         int cacheSize = Integer.parseInt(args[1]);
         String inputFileName = args[2];
     	Scanner scan = new Scanner(new File(inputFileName));
-        Page pageTable[] = new Page[550];
+        Page pageTable[] = new Page[550];   //Array to hold all imported Page Files
         int i = 0;
         while(scan.hasNext() == true)
         {  
@@ -39,10 +39,13 @@ public class PageReplacementAlgorithms
         }
         //END scanning page files
 
-
         //Print statments for verification
         System.out.printf("System Cache Size: %d\n", cacheSize);
         System.out.printf("Algorithm to use: %s\n", algorithm);
+
+        //Begin LRU WORK
+        LRU cache = new LRU(cacheSize, pageTable);
+
 
     }
 

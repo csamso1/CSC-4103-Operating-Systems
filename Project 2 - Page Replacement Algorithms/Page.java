@@ -10,11 +10,14 @@ LoginID:	cs410385
 public class Page
 {	
 
-	//boolean for if the page has been written to
+	//String representing the action preformed to this page
 	public String action;
 
 	//Integer to hold page ID value
 	public int pID;
+
+	//Boolean to representing the action preformed to this page
+	boolean modifyBit;
 
 	//Constructs a new Page
 	public Page(String pageAction, int pageID)
@@ -24,6 +27,13 @@ public class Page
 
 		//Sets pID value to the provided Page ID
 		pID = pageID;
+
+		if(action.equalsIgnoreCase("W")){
+			modifyBit = true;
+		}
+		else{
+			modifyBit = false;
+		}
 	}
 
 	public boolean getWriteStatus()

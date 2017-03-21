@@ -6,28 +6,29 @@ Instructor:	Feng Chen
 Class:		cs4103-sp17
 LoginID:	cs410385
 */
+import java.util.*;
 
 public class LRU
 {
 	//Integer to track the Cache Size
-	private int size;
+	private int capacity;
 
 	private int numPages;
 
 	//Integer to track head of stack
 	int head;
 
+	//Integer to track tail of stack
 	int tail;
 
-	//Integer to track tail of stack
-	public class LRU(int capacity, Page[] pageTable)
+	//Constructor for LRU cache structure
+	public LRU(int cacheCapacity, Page[] pageTable)
 	{
-		size = capacity;
+		capacity = cacheCapacity;
 		numPages = 0;
 		head = 0;
 		tail = 0;
-		Page pageStack[] = new Page[size];
-
+		List cache = new LinkedList<Page>();
 	}
 
 	//Maybe use this.. we will see
@@ -35,40 +36,66 @@ public class LRU
 		return;
 	}
 
-	//Pushes a new process to the top of the stack
-	public void push(int processID, int modifyBit)
+	//Loads a new Page File into cache
+	public void loadPage(Page newPage)
 	{
+		int index = cache.indexOf(newPage);
+		//Cache Empty
+		if(isFull(cache) == false){
+			//Cache Miss
+			if(index == -1){
+				cache.add(newPage);	
+				//INCREMENT TIME UNIT
+				
+				//Print statment for testing
+				System.out.printf("New Page added to non empty cache.\n");
+			}
+			//Cache Hit
+			else{
+				moveToTop(newPage, index);
+			}
+		}
+
 		//Cache Hit
-		if(searchStack(processID) >= 0)
+		if(index >= 0)
 		{
-			//ToDo: move page to top of stack
+			moveToTop(newPage, index);
+			//Increment TIME UNIT
+			//Print statement for testing
+			System.out.prinf("Cache Hit! Page moved to top of stack.");
 		}
 		//Cache Miss
 		else{
-			//ToDo: Evict Page
+			cache.evictPage();
+			cache.add(newPage);
 		}
 	}
 
-	public void remove(int index)
-	{
-		pageTable[index] = null
-		for(int i = index; i < size; i++)
-		{
-			//ToDo: move all pages down so a new page can be pushed to the top of the stack
-		}
+	//Helper method for choosing a victim to evict when cache miss and cache is full
+	public void evictPage(){
+		cache.remove(cache.size() - 1);
+		//INCREMENT Time unit based on modify bit
+
 	}
 
-	//searches cache for the provided proecess ID, returns -1 if not found
-	private int searchStack(int processID)
+
+	//Helper method for moving a page to the top of the stack, used in cache hit senario
+	public void moveToTop(Page thePage, int pageIndex)
 	{
-		for(int i = 0; i < size; i++)
-		{
-			if(pageStack[i].getPageID() == processID){
-				return i;
-			}
+		cache.remove(pageIndex);
+		cache.add(thePage);
+		//Print statement for testing
+		System.out.printf("Page moved to top of stack!\n");
+
+	}
+
+	public boolean isFull(LinkedList stack)
+	{
+		if(stack.size() > stack.capacity) {
+			return false;
 		}
 		else{
-			return -1;
+			return true;
 		}
 	}
 }
