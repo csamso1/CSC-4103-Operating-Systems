@@ -7,7 +7,7 @@ Class:		cs4103-sp17
 LoginID:	cs410385
 */
 
-public class PageFile
+public class Page
 {	
 
 	//boolean for if the page has been written to
@@ -16,8 +16,8 @@ public class PageFile
 	//Integer to hold page ID value
 	public int pID;
 
-	//Constructs a new pageFile
-	public PageFile(String pageAction, int pageID)
+	//Constructs a new Page
+	public Page(String pageAction, int pageID)
 	{
 		//Sets newWrite flag to provied value
 		action = pageAction;
