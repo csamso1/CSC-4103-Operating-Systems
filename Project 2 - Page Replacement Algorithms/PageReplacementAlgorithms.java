@@ -45,6 +45,7 @@ public class PageReplacementAlgorithms
 
         //Begin LRU WORK
         LRU cache = new LRU(cacheSize, pageTable);
+        cache.Schedule(pageTable);
 
 
     }
