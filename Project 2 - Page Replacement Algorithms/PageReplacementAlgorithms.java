@@ -44,7 +44,17 @@ public class PageReplacementAlgorithms
         System.out.printf("Algorithm to use: %s\n", algorithm);
 
         //Begin LRU WORK
-        LRU cache = new LRU(cacheSize, pageTable);
-        cache.Schedule(pageTable);
+        if(algorithm.equalsIgnoreCase("lru") == true || algorithm.equalsIgnoreCase("Leas Recently Used") == true)
+        {
+            LRU cache = new LRU(cacheSize, pageTable);
+            cache.Schedule(pageTable);
+        }
+        else if(algorithm.equalsIgnoreCase("clock") == true)
+        {
+            System.out.printf("Clock algorithm used, not yet implmented.\n");
+        }
+        else{
+            System.out.printf("Algorithm inproperly defined, please provide 'LRU' or 'CLOCK' as algorithm argument.\n");
+        }
     }
 }
