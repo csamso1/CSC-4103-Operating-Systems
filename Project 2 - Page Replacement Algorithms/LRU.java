@@ -66,25 +66,25 @@ public class LRU
 	public static void loadPage(Page newPage)
 	{
 		//Print statment for testing
-		System.out.printf("loadPage Method called! page: %b %d\n", newPage.getWriteStatus(), newPage.getPageID());
+		//System.out.printf("loadPage Method called! page: %b %d\n", newPage.getWriteStatus(), newPage.getPageID());
 		
 		int index = LRU.searchCache(newPage);
 		numPageReferences++;
 		
 		//Print statment for testing
-		System.out.printf("index = %d\n", index);
+		//System.out.printf("index = %d\n", index);
 		
 		//Cache Empty
 		if(LRU.isFull() == false){
 			//Print statment for testing
-			System.out.printf("LRU.isFull() returned false!\n");
+			//System.out.printf("LRU.isFull() returned false!\n");
 
 			//Cache Miss
 			if(index == -1){
 				LRU.addPage(newPage);
 				numCacheMisses++;
 				//Print statment for testing
-				System.out.printf("New Page added to non empty cache.\n");
+				//System.out.printf("New Page added to non empty cache.\n");
 			}
 			//Cache Hit
 			else{
@@ -94,14 +94,14 @@ public class LRU
 
 		//Cache is full
 		//Print statment for testing
-		System.out.printf("LRU.isFull() returned true\n");
+		//System.out.printf("LRU.isFull() returned true\n");
 
 		//Cache Hit
 		if(index >= 0)
 		{
 			moveToTop(newPage, index);
 			//Print statement for testing
-			System.out.printf("Cache Hit! Page moved to top of stack.\n");
+			//System.out.printf("Cache Hit! Page moved to top of stack.\n");
 		}
 		//Cache Miss
 		else{
@@ -109,7 +109,7 @@ public class LRU
 			LRU.addPage(newPage);
 			numCacheMisses++;
 			//Print statment for testing
-			System.out.printf("Cache is full, and cache miss, page evited and newPage added\n");
+			//System.out.printf("Cache is full, and cache miss, page evited and newPage added\n");
 		}
 	}
 
@@ -137,7 +137,7 @@ public class LRU
 		cache.remove(pageIndex);
 		cache.add(thePage);
 		//Print statement for testing
-		System.out.printf("Page moved to top of stack!\n");
+		//System.out.printf("Page moved to top of stack!\n");
 
 	}
 
@@ -156,7 +156,7 @@ public class LRU
 	public static int searchCache(Page targetPage)
 	{
 		//Print statment for testing
-		System.out.printf("searchCache called!\n");
+		//System.out.printf("searchCache called!\n");
 		int targetPageID = targetPage.getPageID();
 
 		for(int i = 0; i < cache.size(); i++)

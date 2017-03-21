@@ -33,8 +33,8 @@ public class PageReplacementAlgorithms
         while(scan.hasNext() == true)
         {  
             pageTable[i] = new Page(scan.next(), scan.nextInt());
-            // PageTable page0 = new pageTable(scan.next(), scan.nextInt());
-            System.out.printf("page%d added to pageTable :: %b pID: %d\n", i, pageTable[i].getWriteStatus(), pageTable[i].getPageID());
+            //Print statment for testing
+            //System.out.printf("page%d added to pageTable :: %b pID: %d\n", i, pageTable[i].getWriteStatus(), pageTable[i].getPageID());
             i++;
         }
         //END scanning page files
