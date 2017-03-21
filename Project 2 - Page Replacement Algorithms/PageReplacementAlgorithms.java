@@ -28,7 +28,14 @@ public class PageReplacementAlgorithms
         int cacheSize = Integer.parseInt(args[1]);
         String inputFileName = args[2];
     	Scanner scan = new Scanner(new File(inputFileName));
-        Page pageTable[] = new Page[550];   //Array to hold all imported Page Files
+        Scanner scn = new Scanner(new File(inputFileName));
+        int numPagesToSchedule = 0;
+        while(scn.hasNextLine() == true)
+        {
+            numPagesToSchedule++;
+            scn.nextLine();
+        }
+        Page pageTable[] = new Page[numPagesToSchedule];   //Array to hold all imported Page Files
         int i = 0;
         while(scan.hasNext() == true)
         {  
@@ -43,7 +50,7 @@ public class PageReplacementAlgorithms
         System.out.printf("System Cache Size: %d\n", cacheSize);
         System.out.printf("Algorithm to use: %s\n", algorithm);
 
-        //Begin LRU WORK
+        //BEGIN Scheduling
         if(algorithm.equalsIgnoreCase("lru") == true || algorithm.equalsIgnoreCase("Leas Recently Used") == true)
         {
             LRU cache = new LRU(cacheSize, pageTable);
@@ -51,10 +58,12 @@ public class PageReplacementAlgorithms
         }
         else if(algorithm.equalsIgnoreCase("clock") == true)
         {
-            System.out.printf("Clock algorithm used, not yet implmented.\n");
+            Clock cache = new Clock(cacheSize, pageTable);
+            cache.Schedule(pageTable);
         }
         else{
             System.out.printf("Algorithm inproperly defined, please provide 'LRU' or 'CLOCK' as algorithm argument.\n");
         }
+        //END Scheduling
     }
 }

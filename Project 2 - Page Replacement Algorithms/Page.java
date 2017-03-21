@@ -11,13 +11,16 @@ public class Page
 {	
 
 	//String representing the action preformed to this page
-	public String action;
+	private String action;
 
 	//Integer to hold page ID value
-	public int pID;
+	private int pID;
 
-	//Boolean to representing the action preformed to this page
+	//Boolean representing the action preformed to this page
 	boolean modifyBit;
+
+	//Boolean to determine if the page has been referenced recently
+	boolean referenceBit;
 
 	//Constructs a new Page
 	public Page(String pageAction, int pageID)
@@ -34,11 +37,14 @@ public class Page
 		else{
 			modifyBit = false;
 		}
+
+		referenceBit = false;
 	}
 
+	//Method to return if the page has been modified
 	public boolean getWriteStatus()
 	{
-		if(this.action.equalsIgnoreCase("W"))
+		if(this.modifyBit == true)
 		{
 			return true;
 		}
@@ -51,5 +57,21 @@ public class Page
 	public int getPageID()
 	{
 		return this.pID;
+	}
+
+	public boolean getReferenceBit()
+	{
+		if(referenceBit == true)
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public void setReferenceBit(boolean bit)
+	{
+		this.referenceBit = bit;
 	}
 }

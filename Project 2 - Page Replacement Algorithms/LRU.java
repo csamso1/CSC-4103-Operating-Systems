@@ -6,6 +6,7 @@ Instructor:	Feng Chen
 Class:		cs4103-sp17
 LoginID:	cs410385
 */
+
 import java.util.*;
 
 public class LRU
@@ -46,10 +47,11 @@ public class LRU
 		cacheWriteBackTime = 0;
 	}
 
-	//Maybe use this.. we will see
-	public static void Schedule(Page[] pageTable){
+	//Method to schedule the provided pages using LRU algorithm
+	public static void Schedule(Page[] pageTable)
+	{
 		//Print statment for testing
-		System.out.printf("LRU.Schedule() called!\n");
+		//System.out.printf("LRU.Schedule() called!\n");
 		for(int i = 0; i < pageTable.length; i++)
 		{
 			LRU.loadPage(pageTable[i]);
@@ -68,8 +70,8 @@ public class LRU
 		//Print statment for testing
 		//System.out.printf("loadPage Method called! page: %b %d\n", newPage.getWriteStatus(), newPage.getPageID());
 		
-		int index = LRU.searchCache(newPage);
 		numPageReferences++;
+		int index = LRU.searchCache(newPage);
 		
 		//Print statment for testing
 		//System.out.printf("index = %d\n", index);
@@ -114,25 +116,26 @@ public class LRU
 	}
 
 	//Helper method for choosing a victim to evict when cache miss and cache is full
-	public static void evictPage(){
+	private static void evictPage()
+	{
 		//Increments the time unit based on modify bit
 		if(cache.peekFirst().getWriteStatus() == true){
 			cacheWriteBackTime += 10;
 		}
 		cache.remove(0);
 		numPages--;
-
 	}
 
 	//Helper method for adding a new page to the top of the cache
-	public static void addPage(Page newPage){
+	private static void addPage(Page newPage)
+	{
 		cache.add(newPage);
 		cacheMissTime += 5;
 		numPages++;
 	}
 
 	//Helper method for moving a page to the top of the stack, used in cache hit senario
-	public static void moveToTop(Page thePage, int pageIndex)
+	private static void moveToTop(Page thePage, int pageIndex)
 	{
 		cache.remove(pageIndex);
 		cache.add(thePage);
@@ -142,7 +145,7 @@ public class LRU
 	}
 
 	//Determines if the chache is full or not
-	public static boolean isFull()
+	private static boolean isFull()
 	{
 		if(cache.size() >= LRU.capacity) {
 			return true;
@@ -153,7 +156,7 @@ public class LRU
 	}
 	
 	//Helper method for searching the cache, returns -1 if not found
-	public static int searchCache(Page targetPage)
+	private static int searchCache(Page targetPage)
 	{
 		//Print statment for testing
 		//System.out.printf("searchCache called!\n");
