@@ -46,19 +46,5 @@ public class PageReplacementAlgorithms
         //Begin LRU WORK
         LRU cache = new LRU(cacheSize, pageTable);
         cache.Schedule(pageTable);
-
-
-    }
-
-    //Class for CLOCK algorithm
-    public static void clock()
-    {
-    	//ToDo
-    }
-
-    //Class for LRU algorithm
-    public static void lru()
-    {
-    	//ToDo
     }
 }

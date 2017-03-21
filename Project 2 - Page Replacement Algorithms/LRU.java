@@ -54,8 +54,12 @@ public class LRU
 		{
 			LRU.loadPage(pageTable[i]);
 		}
-
-		System.out.printf("Time Elapsed = %d Time Units\n", timeElapsed);
+		timeElapsed = cacheMissTime + cacheWriteBackTime;
+		System.out.printf("Total Time Elapsed = %d Time Units\n", timeElapsed);
+		System.out.printf("Total Cache Miss Time = %d Time Units\n", cacheMissTime);
+		System.out.printf("Total Cache Write Back Time = %d Time Units\n", cacheWriteBackTime);
+		System.out.printf("Total # of page references = %d\n", numPageReferences);
+		System.out.printf("Total # of page misses = %d\n", numCacheMisses);
 	}
 
 	//Loads a new Page File into cache
@@ -65,6 +69,7 @@ public class LRU
 		System.out.printf("loadPage Method called! page: %b %d\n", newPage.getWriteStatus(), newPage.getPageID());
 		
 		int index = LRU.searchCache(newPage);
+		numPageReferences++;
 		
 		//Print statment for testing
 		System.out.printf("index = %d\n", index);
@@ -77,7 +82,7 @@ public class LRU
 			//Cache Miss
 			if(index == -1){
 				LRU.addPage(newPage);
-				
+				numCacheMisses++;
 				//Print statment for testing
 				System.out.printf("New Page added to non empty cache.\n");
 			}
@@ -102,6 +107,7 @@ public class LRU
 		else{
 			LRU.evictPage();
 			LRU.addPage(newPage);
+			numCacheMisses++;
 			//Print statment for testing
 			System.out.printf("Cache is full, and cache miss, page evited and newPage added\n");
 		}
@@ -111,7 +117,7 @@ public class LRU
 	public static void evictPage(){
 		//Increments the time unit based on modify bit
 		if(cache.peekFirst().getWriteStatus() == true){
-			timeElapsed += 10;
+			cacheWriteBackTime += 10;
 		}
 		cache.remove(0);
 		numPages--;
@@ -121,7 +127,7 @@ public class LRU
 	//Helper method for adding a new page to the top of the cache
 	public static void addPage(Page newPage){
 		cache.add(newPage);
-		timeElapsed += 5;
+		cacheMissTime += 5;
 		numPages++;
 	}
 
