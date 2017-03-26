@@ -51,7 +51,7 @@ public class PageReplacementAlgorithms
         System.out.printf("Algorithm to use: %s\n", algorithm);
 
         //BEGIN Scheduling
-        if(algorithm.equalsIgnoreCase("lru") == true || algorithm.equalsIgnoreCase("Leas Recently Used") == true)
+        if(algorithm.equalsIgnoreCase("lru") == true || algorithm.equalsIgnoreCase("Least Recently Used") == true)
         {
             LRU cache = new LRU(cacheSize, pageTable);
             cache.Schedule(pageTable);
