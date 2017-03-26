@@ -74,4 +74,8 @@ public class Page
 	{
 		this.referenceBit = bit;
 	}
+
+	public void setActionToWrite(){
+		this.action = "W";
+	}
 }

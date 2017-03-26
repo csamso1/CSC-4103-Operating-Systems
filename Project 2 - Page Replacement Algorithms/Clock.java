@@ -51,8 +51,6 @@ public class Clock
 		iterator = 0;
 	}
 
-	private static ClockIterator arm = new ClockIterator(capacity);
-
 	//Method to schedule provided pages using the clock algorithm
 	public static void Schedule(Page[] pageTable)
 	{
@@ -92,6 +90,7 @@ public class Clock
 			//Cache Miss while cache is full
 			if(index == -1){
 				Clock.addPage(newPage, Clock.evictPage());
+				numCacheMisses++;
 			}
 			//Cache Hit while cache is full
 			else{
@@ -103,6 +102,7 @@ public class Clock
 	//Helper method for choosing a victim to evict when cache miss and cache is full
 	private static int evictPage()
 	{
+		ClockIterator arm = new ClockIterator(numPages);
 		while(cache.get(arm.getIndex()).getReferenceBit() == true)
 		{
 			//If reference bit == true
