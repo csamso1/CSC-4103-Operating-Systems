@@ -123,9 +123,9 @@ public class LRU
 		//Increments the time unit based on modify bit
 		if(cache.peekFirst().getWriteStatus() == true){
 			cacheWriteBackTime += 10;
-			System.out.printf("dirty page written back to memory, page = %s %s\n", cache.peekFirst().getWriteStatus(), cache.peekFirst().getPageID());
+			// System.out.printf("dirty page written back to memory, page = %s %s\n", cache.peekFirst().getWriteStatus(), cache.peekFirst().getPageID());
 		}
-		System.out.printf("clean page removed, not written back to memory, page = %s %s\n", cache.peekFirst().getWriteStatus(), cache.peekFirst().getPageID());
+		// System.out.printf("clean page removed, not written back to memory, page = %s %s\n", cache.peekFirst().getWriteStatus(), cache.peekFirst().getPageID());
 		cache.remove(0);
 		numPages--;
 	}
@@ -133,7 +133,7 @@ public class LRU
 	//Helper method for adding a new page to the top of the cache
 	private static void addPage(Page newPage)
 	{
-		System.out.printf("addPage() called, new page = %s %s\n", newPage.getWriteStatus(), newPage.getPageID());
+		// System.out.printf("addPage() called, new page = %s %s\n", newPage.getWriteStatus(), newPage.getPageID());
 		cache.add(newPage);
 		cacheMissTime += 5;
 		numPages++;
@@ -143,17 +143,13 @@ public class LRU
 	private static void moveToTop(int pageIndex)
 	{
 
-		System.out.printf("stack before move: %s\n", cache.toString());
+		//System.out.printf("stack before move: %s\n", cache.toString());
 		Page thePage = cache.get(pageIndex);
-		System.out.printf("stack after 'get' is called: %s\n", cache.toString());
-		System.out.printf("moveToTop called, page = %s %s\n", thePage.getWriteStatus(), thePage.getPageID());
-		// if(cache.get(pageIndex).getWriteStatus() == true){
-		// 	thePage.setReferenceBit(true);
-		// 	thePage.setActionToWrite();
-		// }
+		// System.out.printf("stack after 'get' is called: %s\n", cache.toString());
+		// System.out.printf("moveToTop called, page = %s %s\n", thePage.getWriteStatus(), thePage.getPageID());
 		cache.remove(pageIndex);
 		cache.add(thePage);
-		System.out.printf("stack after move operatoins: %s\n", cache.toString());
+		// System.out.printf("stack after move operatoins: %s\n", cache.toString());
 		//Print statement for testing
 		//System.out.printf("Page moved to top of stack!\n");
 
