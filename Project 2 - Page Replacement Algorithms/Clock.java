@@ -62,7 +62,7 @@ public class Clock
 		timeElapsed = cacheMissTime + cacheWriteBackTime;
 		System.out.printf("Total Time Elapsed = %d Time Units\n", timeElapsed);
 		System.out.printf("Total Cache Miss Time = %d Time Units\n", cacheMissTime);
-		System.out.printf("Total Cache Write Back Time = %d Time Units\n", cacheWriteBackTime);
+		System.out.printf("Total Cache Write Back Time (Dirty Page) = %d Time Units\n", cacheWriteBackTime);
 		System.out.printf("Total # of page references = %d\n", numPageReferences);
 		System.out.printf("Total # of page misses = %d\n", numCacheMisses);
 	}
@@ -78,6 +78,8 @@ public class Clock
 			//Cache Miss while cache is not full
 			if(index == -1){
 				Clock.addPage(newPage);
+				//Print statment for testing
+				// System.out.printf("NumCacheMisses++ Page: %s %s added.\n", newPage.getWriteStatus(), newPage.getPageID());
 				numCacheMisses++;
 			}
 			//Cache hit while cache is not full
@@ -86,25 +88,32 @@ public class Clock
 			}
 		}
 		//Cache full
-		{
+		else{
 			//Cache Miss while cache is full
 			if(index == -1){
 				Clock.addPage(newPage, Clock.evictPage());
+				//Print statment for testing
+				// System.out.printf("NumCacheMisses++ Page: %s %s added.", newPage.getWriteStatus(), newPage.getPageID());
+				// System.out.printf("and a page was evicted.\n");
 				numCacheMisses++;
 			}
 			//Cache Hit while cache is full
 			else{
 				cache.get(index).setReferenceBit(true);
 			}
-		}
+		} 
 	}
 
 	//Helper method for choosing a victim to evict when cache miss and cache is full
 	private static int evictPage()
 	{
-		ClockIterator arm = new ClockIterator(numPages);
+		ClockIterator arm = new ClockIterator(capacity);
+
 		while(cache.get(arm.getIndex()).getReferenceBit() == true)
 		{
+			if(cache.get(arm.getIndex()) == null){
+				break;
+			}
 			//If reference bit == true
 			if(cache.get(arm.getIndex()).getReferenceBit() == true)
 			{

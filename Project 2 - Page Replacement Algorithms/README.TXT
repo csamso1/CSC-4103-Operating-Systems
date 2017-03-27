@@ -19,3 +19,10 @@ the program accepts the following strings as inputs for the algorithm:
 
 The program outputs the following information:
 
+System Cache Size: X for input confirmation
+Algorithm to use: clock or lru for input confirmation
+Total Time Elapsed = X Time Units
+Total Cache Miss Time = X Time Units
+Total Cache Write Back Time (Dirty Page) = X Time Units
+Total # of page references = X
+Total # of page misses = X
